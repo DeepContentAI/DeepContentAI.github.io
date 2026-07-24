@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DeepContent AI</title>
-  <meta
-    name="description"
-    content="DeepContent AI transforme ton expertise en 30 jours de contenu utile, crédible et publiable."
-  />
+  <meta name="description" content="DeepContent AI — du contenu de fond, pas du bruit." />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #f7f6f2;
@@ -20,65 +21,44 @@
       --primary: #01696f;
       --primary-hover: #0c4e54;
       --primary-soft: #e4f0ef;
-      --gold-soft: #f5ead7;
-      --gold-text: #8a5b00;
-      --shadow: 0 14px 40px rgba(20, 18, 14, 0.08);
-      --shadow-strong: 0 18px 46px rgba(20, 18, 14, 0.12);
-      --radius: 20px;
-      --container: 1180px;
-      --section-gap: clamp(18px, 3vw, 30px);
-      --text-max: 46ch;
-      --text-max-wide: 54ch;
+      --regen: #8a5b00;
+      --regen-hover: #6f4700;
+      --regen-soft: #f3ead7;
+      --success: #2f6b2f;
+      --error: #9e2f5f;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(20, 18, 14, 0.08);
+      --container: 860px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
       padding: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Inter", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
       min-height: 100vh;
       font-size: 16px;
-      line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    h1, h2, p, strong {
-      overflow-wrap: break-word;
-    }
-
-    h1, h2, p {
-      text-wrap: balance;
+      line-height: 1.5;
     }
 
     .page {
       width: min(100% - 24px, var(--container));
       margin: 0 auto;
+      padding: 24px 0 56px;
     }
 
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 18px 0 10px;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0 20px;
     }
 
     .brand {
@@ -91,8 +71,8 @@
     }
 
     .logo {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 12px;
       background: linear-gradient(135deg, #0d6b70, #17383a);
       display: grid;
@@ -102,106 +82,126 @@
       flex: 0 0 auto;
     }
 
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 14px;
-      border-radius: 999px;
-      background: var(--primary);
-      color: white;
-      font-weight: 800;
-      font-size: 14px;
-      white-space: nowrap;
-      transition: 0.2s ease;
-    }
-
-    .nav-link:hover {
-      background: var(--primary-hover);
-    }
-
     .hero {
-      padding: 16px 0 8px;
-      display: grid;
-      gap: var(--section-gap);
+      padding: 12px 0 20px;
     }
 
-    .hero-copy,
-    .hero-visual,
-    .mini-card,
-    .value-block,
-    .cta-box {
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .card {
       background: var(--surface);
       border: 1px solid var(--border);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
-      border-radius: 24px;
     }
 
-    .hero-copy {
-      padding: 24px 20px;
-      text-align: center;
+    .card-inner {
+      padding: 18px;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      width: fit-content;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin: 0 auto 16px;
+    .card h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
     }
 
-    h1 {
-      margin: 0 auto;
-      font-size: clamp(34px, 8vw, 64px);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 11ch;
-    }
-
-    .free-note {
-      margin: 16px auto 0;
-      max-width: 34ch;
+    .card-subtitle {
+      margin: 0 0 18px;
       color: var(--muted);
-      font-size: 17px;
+      font-size: 14px;
     }
 
-    .hero-actions {
+    .grid {
       display: grid;
-      gap: 12px;
-      margin-top: 22px;
-      justify-content: center;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 760px) {
+      .grid.two {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 14px 14px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(1, 105, 111, 0.14);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 18px;
     }
 
     .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      width: 100%;
-      padding: 0 18px;
+      appearance: none;
+      border: 0;
       border-radius: 14px;
-      font-weight: 800;
-      font-size: 16px;
-      transition: 0.2s ease;
-      text-align: center;
-    }
-
-    .button.primary {
       background: var(--primary);
       color: white;
+      padding: 15px 18px;
+      font: inherit;
+      font-weight: 700;
+      width: 100%;
+      min-height: 52px;
+      cursor: pointer;
     }
 
-    .button.primary:hover {
+    .button:hover {
       background: var(--primary-hover);
+    }
+
+    .button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .button.secondary {
@@ -214,616 +214,766 @@
       background: var(--surface-3);
     }
 
-    .hero-notes {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
+    .button.ghost {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid rgba(1, 105, 111, 0.22);
     }
 
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
+    .button.ghost:hover {
+      background: var(--primary-soft);
+    }
+
+    .button.regen {
+      background: var(--regen);
+      color: white;
+    }
+
+    .button.regen:hover {
+      background: var(--regen-hover);
+    }
+
+    .button.regen-soft {
+      background: var(--regen-soft);
+      color: var(--regen);
+      border: 1px solid rgba(138, 91, 0, 0.2);
+    }
+
+    .button.regen-soft:hover {
+      background: #eadcbc;
+    }
+
+    .status {
+      min-height: 22px;
+      font-size: 14px;
       color: var(--muted);
+    }
+
+    .status.success { color: var(--success); }
+    .status.error { color: var(--error); }
+
+    .status.loading {
+      color: var(--regen);
+      font-weight: 600;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 8px 0 0;
+    }
+
+    .generation-stack {
+      display: grid;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .generation-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      padding: 14px;
+    }
+
+    .generation-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .generation-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .generation-badge {
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--primary-soft);
+      color: var(--primary);
       font-size: 12px;
       font-weight: 700;
     }
 
-    .hero-visual {
-      padding: 16px;
-      background: linear-gradient(180deg, #ffffff, #f5f2ed);
+    .result-meta,
+    .pillars,
+    .days,
+    .saved-days {
+      display: grid;
+      gap: 12px;
     }
 
-    .browser {
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: white;
-      box-shadow: var(--shadow-strong);
-    }
-
-    .browser-top {
-      display: flex;
+    .pill {
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      background: #fbfaf8;
-    }
-
-    .dot {
-      width: 9px;
-      height: 9px;
+      width: fit-content;
+      padding: 6px 10px;
       border-radius: 999px;
-      background: #d5d0c8;
+      background: #e7f0ef;
+      color: #12484a;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
     }
 
-    .browser-content {
-      padding: 16px;
-      display: grid;
-      gap: 14px;
-      background:
-        radial-gradient(circle at top right, rgba(1, 105, 111, 0.06), transparent 34%),
-        linear-gradient(180deg, #ffffff, #fcfbf9);
+    .section-block {
+      margin-top: 18px;
     }
 
-    .mock-form,
-    .mock-result {
-      border: 1px solid rgba(31, 29, 25, 0.1);
-      border-radius: 18px;
-      padding: 16px;
-      background: white;
-      box-shadow: 0 10px 28px rgba(20, 18, 14, 0.05);
+    .item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--surface);
     }
 
-    .mock-form {
-      background: linear-gradient(180deg, #f3f9f8, #edf6f5);
-      border-color: rgba(1, 105, 111, 0.14);
+    .item.saved {
+      border-color: rgba(1, 105, 111, 0.3);
+      background: #f5faf9;
     }
 
-    .mock-result {
-      background: linear-gradient(180deg, #ffffff, #f2f8f7);
-      border-color: rgba(1, 105, 111, 0.14);
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 8px;
     }
 
-    .mock-title,
-    .example-title {
-      font-size: 15px;
-      font-weight: 800;
-      margin-bottom: 10px;
-      letter-spacing: -0.02em;
-      text-align: center;
+    .item-top strong {
+      font-size: 16px;
     }
 
-    .mock-title {
-      color: var(--primary);
+    .item small {
+      color: var(--muted);
     }
 
-    .mock-fields {
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .meta-badge {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--surface-2);
+    }
+
+    .item-actions {
+      margin-top: 12px;
       display: grid;
       gap: 10px;
     }
 
-    .mock-input {
-      min-height: 44px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(1, 105, 111, 0.12);
+    .save-btn,
+    .regen-btn {
+      min-height: 48px;
+    }
+
+    .generation-actions {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .saved-section {
+      margin-top: 26px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+    }
+
+    .saved-head {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 10px 12px;
-      color: #24575a;
-      font-size: 13px;
-      text-align: center;
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.88),
-        0 1px 2px rgba(1, 105, 111, 0.04);
-    }
-
-    .idea-title {
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-
-    .idea-text {
-      color: var(--muted);
-      font-size: 14px;
-      margin: 0 auto 10px;
-      text-align: center;
-      max-width: 34ch;
-    }
-
-    .idea-meta {
-      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
       flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
     }
 
-    .chip {
-      border-radius: 999px;
-      background: rgba(1, 105, 111, 0.08);
-      border: 1px solid rgba(1, 105, 111, 0.12);
-      padding: 5px 9px;
-      font-size: 12px;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .mini-grid {
-      display: grid;
-      gap: 14px;
-      padding: 14px 0 6px;
-    }
-
-    .mini-card {
-      padding: 18px;
-      text-align: center;
-    }
-
-    .mini-card strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .mini-card p {
-      margin: 0 auto;
-      color: var(--muted);
-      max-width: 28ch;
-    }
-
-    .value-section {
-      padding: 18px 0;
-    }
-
-    .value-block {
-      padding: 24px 20px;
-      text-align: center;
-      background:
-        radial-gradient(circle at top left, rgba(1, 105, 111, 0.08), transparent 30%),
-        linear-gradient(180deg, #ffffff, #fbfaf7);
-      box-shadow: var(--shadow-strong);
-    }
-
-    .value-label {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--gold-soft);
-      color: var(--gold-text);
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 14px;
-    }
-
-    .value-block h2 {
-      margin: 0 auto;
-      font-size: clamp(28px, 5vw, 44px);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-      max-width: 14ch;
-    }
-
-    .value-block > p {
-      margin: 12px auto 0;
-      color: var(--muted);
-      max-width: var(--text-max);
-      font-size: 17px;
-    }
-
-    .value-grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 20px;
-    }
-
-    .value-card {
-      border: 1px solid rgba(31, 29, 25, 0.1);
-      border-radius: 18px;
-      background: white;
-      padding: 18px;
-      text-align: left;
-      box-shadow: 0 10px 24px rgba(20, 18, 14, 0.05);
-    }
-
-    .value-card strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 17px;
-      letter-spacing: -0.02em;
-    }
-
-    .value-card p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 34ch;
-    }
-
-    .value-cta {
-      margin-top: 20px;
-      border: 1px solid rgba(1, 105, 111, 0.12);
-      border-radius: 18px;
-      background: linear-gradient(180deg, #eef7f6, #f8fcfb);
-      padding: 20px;
-      text-align: center;
-    }
-
-    .value-cta strong {
-      display: block;
-      font-size: clamp(24px, 3vw, 30px);
-      line-height: 1.12;
-      letter-spacing: -0.03em;
-      margin: 0 auto 10px;
-      max-width: 24ch;
-    }
-
-    .value-cta p {
-      margin: 0 auto;
-      max-width: var(--text-max);
-      color: var(--muted);
-    }
-
-    .value-cta .button {
-      margin-top: 18px;
-    }
-
-    .value-note {
-      margin-top: 12px;
+    .saved-count {
       font-size: 13px;
       color: var(--muted);
       font-weight: 600;
     }
 
-    .cta {
-      padding: 18px 0 42px;
-    }
-
-    .cta-box {
-      padding: 24px 20px;
-      text-align: center;
-    }
-
-    .cta-box h2 {
-      margin: 0 auto 10px;
-      font-size: clamp(28px, 5vw, 42px);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-      max-width: 14ch;
-    }
-
-    .cta-box p {
-      margin: 0 auto;
+    .session-note {
+      margin-top: 10px;
+      font-size: 13px;
       color: var(--muted);
-      max-width: var(--text-max-wide);
     }
 
-    .cta-actions {
-      display: grid;
-      gap: 12px;
-      margin-top: 20px;
-      justify-content: center;
-    }
-
-    .footer {
-      padding: 0 0 28px;
+    .footer-note {
+      margin-top: 18px;
       color: var(--muted);
       font-size: 13px;
-      text-align: center;
     }
 
-    @media (max-width: 479px) {
-      .page {
-        width: min(100% - 16px, var(--container));
-      }
-
-      .topbar {
-        gap: 10px;
-      }
-
-      .brand {
-        font-size: 16px;
-      }
-
-      .nav-link {
-        padding: 0 12px;
-        font-size: 13px;
-      }
-
-      .hero-copy,
-      .hero-visual,
-      .value-block,
-      .cta-box {
-        border-radius: 20px;
-      }
-    }
-
-    @media (min-width: 860px) {
-      .page {
-        width: min(100% - 48px, var(--container));
-      }
-
-      .topbar {
-        padding: 22px 0 12px;
-      }
-
-      .hero {
-        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-        align-items: stretch;
-        gap: 24px;
-      }
-
-      .hero-copy,
-      .hero-visual,
-      .value-block,
-      .cta-box {
-        padding: 32px;
-      }
-
-      .hero-copy,
-      .value-block,
-      .cta-box {
-        text-align: center;
-      }
-
-      .eyebrow,
-      .value-label,
-      h1,
-      .free-note,
-      .value-block > p,
-      .cta-box h2,
-      .cta-box p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-actions,
-      .cta-actions,
-      .hero-notes,
-      .idea-meta {
-        justify-content: center;
-      }
-
-      .hero-actions,
-      .cta-actions {
-        grid-template-columns: auto auto;
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .button {
-        width: auto;
-        min-width: 220px;
-      }
-
-      .browser-content {
-        padding: 18px;
-      }
-
-      .mini-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-        padding: 18px 0 8px;
-      }
-
-      .value-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .value-card {
-        height: 100%;
-      }
-
-      .value-cta {
-        margin-top: 24px;
-        padding: 24px;
-      }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="page">
+  <main class="page">
     <header class="topbar">
       <div class="brand">
         <div class="logo" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M5 6H13L9 10H5V6Z" fill="currentColor"></path>
-            <path d="M5 12H17L13 16H5V12Z" fill="currentColor"></path>
-            <path d="M5 18H21L17 22H5V18Z" fill="currentColor"></path>
+            <path d="M5 6H13L9 10H5V6Z" fill="currentColor"/>
+            <path d="M5 12H17L13 16H5V12Z" fill="currentColor"/>
+            <path d="M5 18H21L17 22H5V18Z" fill="currentColor"/>
           </svg>
         </div>
         <span>DeepContent AI</span>
       </div>
-
-      <a
-        class="nav-link"
-        href="https://deepcontent-frontend.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Voir l’app
-      </a>
     </header>
 
     <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow">Contenu de fond, pas du bruit</div>
-        <h1>Transforme ton expertise en 30 jours de contenu utile.</h1>
-        <p class="free-note">
-          Gratuit pour tester, simple à prendre en main, pensé pour t’aider à publier mieux.
-        </p>
-
-        <div class="hero-actions">
-          <a
-            class="button primary"
-            href="https://deepcontent-frontend.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Tester gratuitement
-          </a>
-        </div>
-
-        <div class="hero-notes">
-          <span class="tag">Consultants</span>
-          <span class="tag">Freelances</span>
-          <span class="tag">Experts B2B</span>
-          <span class="tag">Entrepreneurs</span>
-          <span class="tag">Solopreneurs</span>
-          <span class="tag">Coachs</span>
-          <span class="tag">Bloggers</span>
-          <span class="tag">Créateurs</span>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-        <div class="browser">
-          <div class="browser-top">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-
-          <div class="browser-content">
-            <div class="mock-form">
-              <div class="mock-title">Ce que tu renseignes</div>
-              <div class="mock-fields">
-                <div class="mock-input">Décris ton activité</div>
-                <div class="mock-input">Décris ton audience</div>
-                <div class="mock-input">Décris ton objectif</div>
-              </div>
-            </div>
-
-            <div class="mock-result">
-              <div class="example-title">Exemple de résultat</div>
-              <div class="idea-title">
-                Pourquoi tes posts sont lus mais ne déclenchent aucun message
-              </div>
-              <div class="idea-text">
-                Un angle centré sur les signaux faibles de conversion et les erreurs de positionnement.
-              </div>
-              <div class="idea-meta">
-                <span class="chip">Crédibilité</span>
-                <span class="chip">Preuve</span>
-                <span class="chip">Contenu de fond</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1>30 jours de contenu utile à partir de ton expertise.</h1>
+      <p>
+        Génère un calendrier éditorial structuré à partir de ton positionnement, ton audience et ton objectif business.
+      </p>
     </section>
 
-    <section class="mini-grid">
-      <article class="mini-card">
-        <strong>Tu gagnes du temps</strong>
-        <p>Tu ne pars plus d’une page blanche à chaque publication.</p>
-      </article>
-
-      <article class="mini-card">
-        <strong>Tu publies plus juste</strong>
-        <p>Les idées sont orientées expertise, pas contenu vide.</p>
-      </article>
-
-      <article class="mini-card">
-        <strong>Tu gardes le contrôle</strong>
-        <p>Tu compares, tu régénères et tu sélectionnes ce qui te ressemble.</p>
-      </article>
-    </section>
-
-    <section class="value-section">
-      <div class="value-block">
-        <div class="value-label">La vraie valeur ajoutée</div>
-        <h2>Ce que l’outil produit</h2>
-        <p>
-          Pas une liste de titres vagues. Une base éditoriale exploitable, pensée pour être réellement publiée.
-        </p>
-
-        <div class="value-grid">
-          <article class="value-card">
-            <strong>Des angles crédibles</strong>
-            <p>
-              Objections clients, erreurs fréquentes, points de vue utiles, preuves, coulisses et signaux de confiance.
-            </p>
-          </article>
-
-          <article class="value-card">
-            <strong>Une vraie logique business</strong>
-            <p>
-              Des idées qui peuvent servir la visibilité, la crédibilité ou la conversion indirecte.
-            </p>
-          </article>
-
-          <article class="value-card">
-            <strong>Une base vraiment exploitable</strong>
-            <p>
-              Tu repars avec des idées plus solides, plus précises et plus proches de ce que tu pourrais vraiment publier.
-            </p>
-          </article>
-        </div>
-
-        <div class="value-cta">
-          <strong>Teste DeepContent AI et vois en quelques secondes ce qu’il peut vraiment t’apporter.</strong>
-          <p>
-            Si les idées générées te semblent plus solides, plus crédibles et plus utiles que d’habitude, tu sauras vite que l’outil vaut le clic.
+    <section class="layout">
+      <article class="card">
+        <div class="card-inner">
+          <h2>Générateur</h2>
+          <p class="card-subtitle">
+            Renseigne ton positionnement, puis génère jusqu’à 4 versions à comparer directement dans le même flux.
           </p>
-          <a
-            class="button primary"
-            href="https://deepcontent-frontend.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Tester gratuitement
-          </a>
-          <div class="value-note">V1 test avec 4 générations possibles.</div>
+
+          <form id="calendarForm" class="grid" autocomplete="off">
+            <div class="grid two">
+              <div class="field">
+                <label for="activity">Activité</label>
+                <input id="activity" name="activity" placeholder="consultant B2B" required />
+              </div>
+
+              <div class="field">
+                <label for="audience">Audience</label>
+                <input id="audience" name="audience" placeholder="fondateurs SaaS" required />
+              </div>
+            </div>
+
+            <div class="grid two">
+              <div class="field">
+                <label for="main_goal">Objectif principal</label>
+                <input id="main_goal" name="main_goal" placeholder="signer 3 clients" required />
+              </div>
+
+              <div class="field">
+                <label for="platform">Plateforme</label>
+                <input id="platform" name="platform" placeholder="LinkedIn" required />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="tone">Ton</label>
+              <input id="tone" name="tone" placeholder="direct, clair, pro" required />
+            </div>
+
+            <div class="field">
+              <label for="angle">Angle</label>
+              <textarea id="angle" name="angle" placeholder="contenu de fond et preuve"></textarea>
+            </div>
+
+            <div class="actions">
+              <button class="button" id="submitBtn" type="submit">Générer le calendrier</button>
+              <div class="status" id="status"></div>
+              <div class="status" id="quotaStatus"></div>
+            </div>
+          </form>
         </div>
-      </div>
-    </section>
+      </article>
 
-    <section class="cta">
-      <div class="cta-box">
-        <h2>Ton retour m’aidera à améliorer l’app.</h2>
-        <p>
-          Après avoir testé DeepContent AI, j’apprécierais vraiment que tu prennes quelques secondes de ton temps pour me dire ce que tu en penses. Tes retours me servent directement à améliorer l’app et à prioriser les prochaines fonctionnalités de la roadmap.
-        </p>
+      <article class="card">
+        <div class="card-inner">
+          <h2>Résultats</h2>
+          <p class="card-subtitle">
+            Chaque régénération s’ajoute en dessous. Garde uniquement les idées que tu préfères.
+          </p>
 
-        <div class="cta-actions">
-          <a
-            class="button primary"
-            href="https://fr.linkedin.com/in/jfortunebacquey"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            DM LinkedIn
-          </a>
-          <a
-            class="button secondary"
-            href="mailto:fortunejfb@gmail.com?subject=Retour%20DeepContent%20AI"
-          >
-            Contact par email
-          </a>
+          <div id="emptyState" class="empty">
+            Aucun calendrier généré pour le moment.
+          </div>
+
+          <div id="resultBlock" class="hidden">
+            <div id="generationStack" class="generation-stack"></div>
+
+            <section class="saved-section">
+              <div class="saved-head">
+                <div class="pill">Ma sélection</div>
+                <div class="saved-count" id="savedCount">0 idée gardée</div>
+              </div>
+
+              <div id="savedEmpty" class="empty">
+                Tu n’as encore gardé aucune idée.
+              </div>
+
+              <div class="saved-days" id="savedDaysList"></div>
+
+              <p class="session-note">
+                Les idées gardées restent disponibles pendant cette session uniquement.
+              </p>
+            </section>
+          </div>
+
+          <p class="footer-note">
+            Backend : API Render connectée en direct.
+          </p>
         </div>
-      </div>
+      </article>
     </section>
+  </main>
 
-    <footer class="footer">
-      DeepContent AI — du contenu de fond, pas du bruit.
-    </footer>
-  </div>
+  <script>
+    const API_URL = "https://deepcontent-backend-nu7w.onrender.com/api/generate-calendar";
+
+    const form = document.getElementById("calendarForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusEl = document.getElementById("status");
+    const quotaStatus = document.getElementById("quotaStatus");
+    const emptyState = document.getElementById("emptyState");
+    const resultBlock = document.getElementById("resultBlock");
+    const generationStack = document.getElementById("generationStack");
+    const savedDaysList = document.getElementById("savedDaysList");
+    const savedEmpty = document.getElementById("savedEmpty");
+    const savedCount = document.getElementById("savedCount");
+
+    let savedIdeas = [];
+    let generationCount = 0;
+
+    function setStatus(message, type = "") {
+      statusEl.textContent = message;
+      statusEl.className = "status" + (type ? " " + type : "");
+    }
+
+    function setQuotaStatus(message, type = "") {
+      quotaStatus.textContent = message;
+      quotaStatus.className = "status" + (type ? " " + type : "");
+    }
+
+    function setGlobalButtonsDisabled(disabled) {
+      submitBtn.disabled = disabled;
+      document.querySelectorAll(".regen-btn, .save-btn, [data-remove-key]").forEach((button) => {
+        button.disabled = disabled;
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function decodeUtf8Text(value) {
+      if (typeof value !== "string") return value;
+
+      try {
+        return new TextDecoder("utf-8", { fatal: false }).decode(new TextEncoder().encode(value));
+      } catch {
+        return value;
+      }
+    }
+
+    function normalizeApiData(data) {
+      if (!data || typeof data !== "object") return data;
+
+      const normalized = {
+        ...data,
+        meta: data.meta ? { ...data.meta } : data.meta,
+        quota: data.quota ? { ...data.quota } : data.quota,
+        days: Array.isArray(data.days) ? data.days.map((day) => ({
+          ...day,
+          topic: decodeUtf8Text(day.topic),
+          angle: decodeUtf8Text(day.angle),
+          pillar: decodeUtf8Text(day.pillar),
+          format: decodeUtf8Text(day.format),
+          content_type: decodeUtf8Text(day.content_type),
+          status: decodeUtf8Text(day.status)
+        })) : []
+      };
+
+      if (normalized.meta) {
+        normalized.meta.activity = decodeUtf8Text(normalized.meta.activity);
+        normalized.meta.audience = decodeUtf8Text(normalized.meta.audience);
+        normalized.meta.main_goal = decodeUtf8Text(normalized.meta.main_goal);
+        normalized.meta.platform = decodeUtf8Text(normalized.meta.platform);
+        normalized.meta.tone = decodeUtf8Text(normalized.meta.tone);
+        normalized.meta.angle = decodeUtf8Text(normalized.meta.angle);
+
+        if (Array.isArray(normalized.meta.pillars)) {
+          normalized.meta.pillars = normalized.meta.pillars.map((pillar) => ({
+            ...pillar,
+            name: decodeUtf8Text(pillar.name),
+            description: decodeUtf8Text(pillar.description),
+            value_logic: decodeUtf8Text(pillar.value_logic)
+          }));
+        }
+      }
+
+      return normalized;
+    }
+
+    async function parseJsonUtf8(response) {
+      const buffer = await response.arrayBuffer();
+      const text = new TextDecoder("utf-8").decode(buffer);
+      return JSON.parse(text);
+    }
+
+    function formatGoal(goal) {
+      if (goal === "visibilite") return "visibilité";
+      if (goal === "credibilite") return "crédibilité";
+      if (goal === "conversion") return "conversion";
+      return "non défini";
+    }
+
+    function formatDepth(depth) {
+      if (depth === "deep_dive") return "approfondi";
+      if (depth === "standard") return "standard";
+      return depth || "non défini";
+    }
+
+    function formatContentType(contentType) {
+      if (contentType === "educatif") return "éducatif";
+      if (contentType === "preuve") return "preuve";
+      if (contentType === "opinion") return "opinion";
+      if (contentType === "coulisses") return "coulisses";
+      if (contentType === "promo") return "promo";
+      return contentType || "non défini";
+    }
+
+    function formatStatus(status) {
+      if (status === "idea") return "idée";
+      return status || "—";
+    }
+
+    function formatEvergreenLabel(value) {
+      return value ? "evergreen" : "ponctuel";
+    }
+
+    function renderQuota(quota) {
+      if (!quota) {
+        setQuotaStatus("");
+        return;
+      }
+
+      const remaining = Number(quota.remaining ?? 0);
+      const plural = remaining > 1 ? "s" : "";
+      setQuotaStatus(`Il te reste ${remaining} génération${plural} aujourd’hui.`);
+    }
+
+    function getIdeaKey(day) {
+      return [
+        day.topic || "",
+        day.angle || "",
+        day.pillar || "",
+        day.format || "",
+        day.goal || ""
+      ].join("||");
+    }
+
+    function isSaved(day) {
+      const key = getIdeaKey(day);
+      return savedIdeas.some((item) => item.key === key);
+    }
+
+    function addSavedIdea(day, generationLabel) {
+      const key = getIdeaKey(day);
+
+      if (savedIdeas.some((item) => item.key === key)) {
+        return;
+      }
+
+      savedIdeas.push({
+        key,
+        generationLabel,
+        data: { ...day }
+      });
+
+      rerenderSaveButtons();
+      renderSavedIdeas();
+    }
+
+    function removeSavedIdea(key) {
+      savedIdeas = savedIdeas.filter((item) => item.key !== key);
+      rerenderSaveButtons();
+      renderSavedIdeas();
+    }
+
+    function rerenderSaveButtons() {
+      document.querySelectorAll(".save-btn").forEach((button) => {
+        const key = button.getAttribute("data-key");
+        const saved = savedIdeas.some((item) => item.key === key);
+
+        button.className = "button " + (saved ? "secondary" : "ghost") + " save-btn";
+        button.textContent = saved ? "Retirer de ma sélection" : "Garder cette idée";
+      });
+
+      document.querySelectorAll(".generation-item").forEach((card) => {
+        const key = card.getAttribute("data-key");
+        const saved = savedIdeas.some((item) => item.key === key);
+        card.classList.toggle("saved", saved);
+      });
+    }
+
+    function renderSavedIdeas() {
+      const count = savedIdeas.length;
+      savedCount.textContent = `${count} idée${count > 1 ? "s" : ""} gardée${count > 1 ? "s" : ""}`;
+
+      if (!count) {
+        savedEmpty.classList.remove("hidden");
+        savedDaysList.innerHTML = "";
+        return;
+      }
+
+      savedEmpty.classList.add("hidden");
+
+      savedDaysList.innerHTML = savedIdeas.map((item, index) => {
+        const day = item.data;
+
+        return `
+          <div class="item saved">
+            <div class="item-top">
+              <strong>Sélection ${index + 1}</strong>
+              <small>${escapeHtml(item.generationLabel)} · Jour ${escapeHtml(day.day)}</small>
+            </div>
+            <div><strong>${escapeHtml(day.topic)}</strong></div>
+            <div style="margin-top: 6px;">${escapeHtml(day.angle)}</div>
+            <div class="meta-line">
+              <span class="meta-badge">${escapeHtml(day.pillar)}</span>
+              <span class="meta-badge">${escapeHtml(day.format)}</span>
+              <span class="meta-badge">${escapeHtml(formatContentType(day.content_type))}</span>
+              <span class="meta-badge">${escapeHtml(formatDepth(day.depth))}</span>
+              <span class="meta-badge">objectif : ${escapeHtml(formatGoal(day.goal))}</span>
+              <span class="meta-badge">${escapeHtml(formatEvergreenLabel(day.evergreen))}</span>
+            </div>
+            <div class="item-actions">
+              <button class="button secondary" type="button" data-remove-key="${escapeHtml(item.key)}">
+                Retirer de ma sélection
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll("[data-remove-key]").forEach((button) => {
+        button.addEventListener("click", () => {
+          removeSavedIdea(button.getAttribute("data-remove-key"));
+        });
+      });
+    }
+
+    function createDayCard(day, generationLabel) {
+      const key = getIdeaKey(day);
+      const saved = isSaved(day);
+
+      return `
+        <div class="item generation-item ${saved ? "saved" : ""}" data-key="${escapeHtml(key)}">
+          <div class="item-top">
+            <strong>Jour ${escapeHtml(day.day)}</strong>
+            <small>${escapeHtml(formatStatus(day.status))}</small>
+          </div>
+          <div><strong>${escapeHtml(day.topic)}</strong></div>
+          <div style="margin-top: 6px;">${escapeHtml(day.angle)}</div>
+          <div class="meta-line">
+            <span class="meta-badge">${escapeHtml(day.pillar)}</span>
+            <span class="meta-badge">${escapeHtml(day.format)}</span>
+            <span class="meta-badge">${escapeHtml(formatContentType(day.content_type))}</span>
+            <span class="meta-badge">${escapeHtml(formatDepth(day.depth))}</span>
+            <span class="meta-badge">objectif : ${escapeHtml(formatGoal(day.goal))}</span>
+            <span class="meta-badge">${escapeHtml(formatEvergreenLabel(day.evergreen))}</span>
+          </div>
+          <div class="item-actions">
+            <button
+              class="button ${saved ? "secondary" : "ghost"} save-btn"
+              type="button"
+              data-key="${escapeHtml(key)}"
+              data-generation-label="${escapeHtml(generationLabel)}"
+              data-day='${escapeHtml(JSON.stringify(day))}'
+            >
+              ${saved ? "Retirer de ma sélection" : "Garder cette idée"}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function attachDynamicEvents(scope = document) {
+      scope.querySelectorAll(".save-btn").forEach((button) => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+
+        button.addEventListener("click", () => {
+          const key = button.getAttribute("data-key");
+          const generationLabel = button.getAttribute("data-generation-label");
+          const day = JSON.parse(button.getAttribute("data-day"));
+
+          if (savedIdeas.some((item) => item.key === key)) {
+            removeSavedIdea(key);
+          } else {
+            addSavedIdea(day, generationLabel);
+          }
+        });
+      });
+
+      scope.querySelectorAll(".regen-btn").forEach((button) => {
+        if (button.dataset.bound === "true") return;
+        button.dataset.bound = "true";
+
+        button.addEventListener("click", async () => {
+          await generateCalendar(false);
+        });
+      });
+    }
+
+    function appendGeneration(data) {
+      generationCount += 1;
+      const generationLabel = `Calendrier ${generationCount}`;
+
+      const block = document.createElement("section");
+      block.className = "generation-card";
+      block.innerHTML = `
+        <div class="generation-head">
+          <div class="generation-title">${generationLabel}</div>
+          <div class="generation-badge">${(data.days || []).length} idées</div>
+        </div>
+
+        <div class="result-meta">
+          <div class="item">
+            <div class="item-top">
+              <strong>${escapeHtml(data.meta.activity)}</strong>
+              <small>${escapeHtml(data.meta.platform)}</small>
+            </div>
+            <div><strong>Audience :</strong> ${escapeHtml(data.meta.audience)}</div>
+            <div><strong>Objectif principal :</strong> ${escapeHtml(data.meta.main_goal)}</div>
+            <div><strong>Ton :</strong> ${escapeHtml(data.meta.tone)}</div>
+            <div><strong>Angle :</strong> ${escapeHtml(data.meta.angle || "—")}</div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="pill">Piliers</div>
+          <div class="pillars" style="margin-top: 12px;">
+            ${(data.meta.pillars || []).map((pillar) => `
+              <div class="item">
+                <div class="item-top">
+                  <strong>${escapeHtml(pillar.name)}</strong>
+                </div>
+                <div>${escapeHtml(pillar.description)}</div>
+                <div class="meta-line">
+                  <span class="meta-badge">${escapeHtml(pillar.value_logic)}</span>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="pill">Plan sur 30 jours</div>
+          <div class="days" style="margin-top: 12px;">
+            ${(data.days || []).map((day) => createDayCard(day, generationLabel)).join("")}
+          </div>
+        </div>
+
+        <div class="generation-actions">
+          <button class="button regen regen-btn" type="button">Regénérer ce calendrier</button>
+        </div>
+      `;
+
+      generationStack.appendChild(block);
+      attachDynamicEvents(block);
+      rerenderSaveButtons();
+      renderSavedIdeas();
+
+      block.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function generateCalendar(isFirstGeneration = false) {
+      const payload = {
+        activity: form.activity.value.trim(),
+        audience: form.audience.value.trim(),
+        main_goal: form.main_goal.value.trim(),
+        platform: form.platform.value.trim(),
+        tone: form.tone.value.trim(),
+        angle: form.angle.value.trim()
+      };
+
+      setGlobalButtonsDisabled(true);
+
+      if (isFirstGeneration && generationCount === 0) {
+        setStatus("Premier chargement : le serveur se réveille, cela peut prendre jusqu’à 30 secondes.", "loading");
+      } else {
+        setStatus("Génération du calendrier en cours...", "loading");
+      }
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const rawData = await parseJsonUtf8(response);
+        const data = normalizeApiData(rawData);
+
+        if (!response.ok) {
+          if (response.status === 429 && data?.detail?.message) {
+            throw new Error("API_429::" + data.detail.message);
+          }
+          throw new Error("Erreur API " + response.status);
+        }
+
+        emptyState.classList.add("hidden");
+        resultBlock.classList.remove("hidden");
+
+        appendGeneration(data);
+        renderQuota(data.quota);
+        setStatus("Calendrier généré avec succès.", "success");
+      } catch (error) {
+        if (error.message.startsWith("API_429::")) {
+          setStatus(error.message.replace("API_429::", ""), "error");
+        } else {
+          setStatus("Impossible de générer le calendrier. " + error.message, "error");
+        }
+        setQuotaStatus("");
+      } finally {
+        setGlobalButtonsDisabled(false);
+      }
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await generateCalendar(true);
+    });
+
+    renderSavedIdeas();
+  </script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js")
+          .then(() => console.log("Service Worker enregistré"))
+          .catch((error) => console.error("Erreur Service Worker :", error));
+      });
+    }
+  </script>
 </body>
 </html>
