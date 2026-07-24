@@ -25,7 +25,10 @@
       --shadow: 0 14px 40px rgba(20, 18, 14, 0.08);
       --shadow-strong: 0 18px 46px rgba(20, 18, 14, 0.12);
       --radius: 20px;
-      --container: 1120px;
+      --container: 1180px;
+      --section-gap: clamp(18px, 3vw, 30px);
+      --text-max: 46ch;
+      --text-max-wide: 54ch;
     }
 
     * {
@@ -47,12 +50,22 @@
     body {
       min-height: 100vh;
       font-size: 16px;
-      line-height: 1.5;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    h1, h2, p, strong {
+      overflow-wrap: break-word;
+    }
+
+    h1, h2, p {
+      text-wrap: balance;
     }
 
     .page {
@@ -65,7 +78,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      padding: 18px 0 8px;
+      padding: 18px 0 10px;
     }
 
     .brand {
@@ -101,6 +114,7 @@
       font-weight: 800;
       font-size: 14px;
       white-space: nowrap;
+      transition: 0.2s ease;
     }
 
     .nav-link:hover {
@@ -108,9 +122,9 @@
     }
 
     .hero {
-      padding: 16px 0 14px;
+      padding: 16px 0 8px;
       display: grid;
-      gap: 18px;
+      gap: var(--section-gap);
     }
 
     .hero-copy,
@@ -125,7 +139,7 @@
     }
 
     .hero-copy {
-      padding: 24px;
+      padding: 24px 20px;
       text-align: center;
     }
 
@@ -150,7 +164,7 @@
       font-size: clamp(34px, 8vw, 64px);
       line-height: 0.98;
       letter-spacing: -0.05em;
-      max-width: 10ch;
+      max-width: 11ch;
     }
 
     .free-note {
@@ -178,6 +192,7 @@
       font-weight: 800;
       font-size: 16px;
       transition: 0.2s ease;
+      text-align: center;
     }
 
     .button.primary {
@@ -322,8 +337,9 @@
     .idea-text {
       color: var(--muted);
       font-size: 14px;
-      margin-bottom: 10px;
+      margin: 0 auto 10px;
       text-align: center;
+      max-width: 34ch;
     }
 
     .idea-meta {
@@ -362,8 +378,9 @@
     }
 
     .mini-card p {
-      margin: 0;
+      margin: 0 auto;
       color: var(--muted);
+      max-width: 28ch;
     }
 
     .value-section {
@@ -395,16 +412,17 @@
     }
 
     .value-block h2 {
-      margin: 0;
+      margin: 0 auto;
       font-size: clamp(28px, 5vw, 44px);
       line-height: 1.02;
       letter-spacing: -0.04em;
+      max-width: 14ch;
     }
 
     .value-block > p {
       margin: 12px auto 0;
       color: var(--muted);
-      max-width: 42ch;
+      max-width: var(--text-max);
       font-size: 17px;
     }
 
@@ -433,6 +451,7 @@
     .value-card p {
       margin: 0;
       color: var(--muted);
+      max-width: 34ch;
     }
 
     .value-cta {
@@ -441,19 +460,21 @@
       border-radius: 18px;
       background: linear-gradient(180deg, #eef7f6, #f8fcfb);
       padding: 20px;
+      text-align: center;
     }
 
     .value-cta strong {
       display: block;
-      font-size: 22px;
+      font-size: clamp(24px, 3vw, 30px);
       line-height: 1.12;
       letter-spacing: -0.03em;
-      margin-bottom: 10px;
+      margin: 0 auto 10px;
+      max-width: 24ch;
     }
 
     .value-cta p {
       margin: 0 auto;
-      max-width: 42ch;
+      max-width: var(--text-max);
       color: var(--muted);
     }
 
@@ -473,7 +494,7 @@
     }
 
     .cta-box {
-      padding: 24px;
+      padding: 24px 20px;
       text-align: center;
     }
 
@@ -488,7 +509,7 @@
     .cta-box p {
       margin: 0 auto;
       color: var(--muted);
-      max-width: 50ch;
+      max-width: var(--text-max-wide);
     }
 
     .cta-actions {
@@ -505,61 +526,84 @@
       text-align: center;
     }
 
+    @media (max-width: 479px) {
+      .page {
+        width: min(100% - 16px, var(--container));
+      }
+
+      .topbar {
+        gap: 10px;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .nav-link {
+        padding: 0 12px;
+        font-size: 13px;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .value-block,
+      .cta-box {
+        border-radius: 20px;
+      }
+    }
+
     @media (min-width: 860px) {
+      .page {
+        width: min(100% - 48px, var(--container));
+      }
+
+      .topbar {
+        padding: 22px 0 12px;
+      }
+
       .hero {
-        grid-template-columns: 1.02fr 0.98fr;
-        align-items: center;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        align-items: stretch;
+        gap: 24px;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .value-block,
+      .cta-box {
+        padding: 32px;
       }
 
       .hero-copy,
       .value-block,
       .cta-box {
-        text-align: left;
+        text-align: center;
       }
 
       .eyebrow,
-      .value-label {
-        margin-left: 0;
-        margin-right: 0;
-      }
-
+      .value-label,
       h1,
       .free-note,
       .value-block > p,
       .cta-box h2,
       .cta-box p {
-        margin-left: 0;
-        margin-right: 0;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .hero-notes,
-      .idea-meta,
       .hero-actions,
-      .cta-actions {
-        justify-content: flex-start;
-      }
-
-      .mock-title,
-      .example-title,
-      .idea-title,
-      .idea-text {
-        text-align: left;
-      }
-
-      .hero-copy {
-        padding: 34px;
-      }
-
-      .hero-visual,
-      .cta-box,
-      .value-block {
-        padding: 28px;
+      .cta-actions,
+      .hero-notes,
+      .idea-meta {
+        justify-content: center;
       }
 
       .hero-actions,
       .cta-actions {
         grid-template-columns: auto auto;
         width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .button {
@@ -567,17 +611,28 @@
         min-width: 220px;
       }
 
+      .browser-content {
+        padding: 18px;
+      }
+
       .mini-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        padding: 18px 0 8px;
       }
 
       .value-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
       }
 
-      .value-cta p {
-        margin-left: 0;
-        margin-right: 0;
+      .value-card {
+        height: 100%;
+      }
+
+      .value-cta {
+        margin-top: 24px;
+        padding: 24px;
       }
     }
   </style>
@@ -723,9 +778,9 @@
         </div>
 
         <div class="value-cta">
-          <strong>Le plus simple est de tester par toi-même et voir en quelques secondes ce que DeepContent AI peut vraiment t’apporter.</strong>
+          <strong>Teste DeepContent AI et vois en quelques secondes ce qu’il peut vraiment t’apporter.</strong>
           <p>
-            Si les idées générées te semblent plus fortes, plus crédibles et plus utiles que ce que tu produis d’habitude, tu sauras immédiatement que l’outil vaut le clic.
+            Si les idées générées te semblent plus solides, plus crédibles et plus utiles que d’habitude, tu sauras vite que l’outil vaut le clic.
           </p>
           <a
             class="button primary"
@@ -771,4 +826,4 @@
     </footer>
   </div>
 </body>
-    </html> 
+</html>
