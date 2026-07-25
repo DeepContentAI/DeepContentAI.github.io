@@ -442,18 +442,14 @@
 
     <section class="hero">
       <h1>30 jours de contenu utile à partir de ton expertise.</h1>
-      <p>
-      Pensé pour les indépendants qui veulent transformer leur expertise en un plan de contenu clair, structuré et simple à publier.  
-      </p>
+      <p>Pensé pour les indépendants qui veulent transformer leur expertise en un plan de contenu clair, structuré et simple à publier.</p>
     </section>
 
     <section class="layout">
       <article class="card">
         <div class="card-inner">
           <h2>Générateur</h2>
-          <p class="card-subtitle">
-            Renseigne ton activité, puis génère jusqu’à 4 versions à comparer directement dans le même flux.
-          </p>
+          <p class="card-subtitle">Renseigne ton activité, puis génère jusqu’à 4 versions à comparer directement dans le même flux.</p>
 
           <form id="calendarForm" class="grid" autocomplete="off">
             <div class="grid two">
@@ -502,13 +498,9 @@
       <article class="card">
         <div class="card-inner">
           <h2>Résultats</h2>
-          <p class="card-subtitle">
-            Chaque régénération s’ajoute en dessous. Garde uniquement les idées que tu préfères.
-          </p>
+          <p class="card-subtitle">Chaque régénération s’ajoute en dessous. Garde uniquement les idées que tu préfères.</p>
 
-          <div id="emptyState" class="empty">
-            Aucun calendrier généré pour le moment.
-          </div>
+          <div id="emptyState" class="empty">Aucun calendrier généré pour le moment.</div>
 
           <div id="resultBlock" class="hidden">
             <div id="generationStack" class="generation-stack"></div>
@@ -519,21 +511,15 @@
                 <div class="saved-count" id="savedCount">0 idée gardée</div>
               </div>
 
-              <div id="savedEmpty" class="empty">
-                Tu n’as encore gardé aucune idée.
-              </div>
+              <div id="savedEmpty" class="empty">Tu n’as encore gardé aucune idée.</div>
 
               <div class="saved-days" id="savedDaysList"></div>
 
-              <p class="session-note">
-                Les idées gardées restent disponibles pendant cette session uniquement.
-              </p>
+              <p class="session-note">Les idées gardées restent disponibles pendant cette session uniquement.</p>
             </section>
           </div>
 
-          <p class="footer-note">
-            Backend : API Render connectée en direct.
-          </p>
+          <p class="footer-note">Version de test.</p>
         </div>
       </article>
     </section>
@@ -584,7 +570,6 @@
 
     function decodeUtf8Text(value) {
       if (typeof value !== "string") return value;
-
       try {
         return new TextDecoder("utf-8", { fatal: false }).decode(new TextEncoder().encode(value));
       } catch {
@@ -594,7 +579,6 @@
 
     function normalizeApiData(data) {
       if (!data || typeof data !== "object") return data;
-
       const normalized = {
         ...data,
         meta: data.meta ? { ...data.meta } : data.meta,
@@ -609,7 +593,6 @@
           status: decodeUtf8Text(day.status)
         })) : []
       };
-
       if (normalized.meta) {
         normalized.meta.activity = decodeUtf8Text(normalized.meta.activity);
         normalized.meta.audience = decodeUtf8Text(normalized.meta.audience);
@@ -617,7 +600,6 @@
         normalized.meta.platform = decodeUtf8Text(normalized.meta.platform);
         normalized.meta.tone = decodeUtf8Text(normalized.meta.tone);
         normalized.meta.angle = decodeUtf8Text(normalized.meta.angle);
-
         if (Array.isArray(normalized.meta.pillars)) {
           normalized.meta.pillars = normalized.meta.pillars.map((pillar) => ({
             ...pillar,
@@ -627,7 +609,6 @@
           }));
         }
       }
-
       return normalized;
     }
 
@@ -673,20 +654,13 @@
         setQuotaStatus("");
         return;
       }
-
       const remaining = Number(quota.remaining ?? 0);
       const plural = remaining > 1 ? "s" : "";
       setQuotaStatus(`Il te reste ${remaining} génération${plural} aujourd’hui.`);
     }
 
     function getIdeaKey(day) {
-      return [
-        day.topic || "",
-        day.angle || "",
-        day.pillar || "",
-        day.format || "",
-        day.goal || ""
-      ].join("||");
+      return [day.topic || "", day.angle || "", day.pillar || "", day.format || "", day.goal || ""].join("||");
     }
 
     function isSaved(day) {
@@ -696,17 +670,8 @@
 
     function addSavedIdea(day, generationLabel) {
       const key = getIdeaKey(day);
-
-      if (savedIdeas.some((item) => item.key === key)) {
-        return;
-      }
-
-      savedIdeas.push({
-        key,
-        generationLabel,
-        data: { ...day }
-      });
-
+      if (savedIdeas.some((item) => item.key === key)) return;
+      savedIdeas.push({ key, generationLabel, data: { ...day } });
       rerenderSaveButtons();
       renderSavedIdeas();
     }
@@ -721,11 +686,9 @@
       document.querySelectorAll(".save-btn").forEach((button) => {
         const key = button.getAttribute("data-key");
         const saved = savedIdeas.some((item) => item.key === key);
-
         button.className = "button " + (saved ? "secondary" : "ghost") + " save-btn";
         button.textContent = saved ? "Retirer de ma sélection" : "Garder cette idée";
       });
-
       document.querySelectorAll(".generation-item").forEach((card) => {
         const key = card.getAttribute("data-key");
         const saved = savedIdeas.some((item) => item.key === key);
@@ -736,18 +699,14 @@
     function renderSavedIdeas() {
       const count = savedIdeas.length;
       savedCount.textContent = `${count} idée${count > 1 ? "s" : ""} gardée${count > 1 ? "s" : ""}`;
-
       if (!count) {
         savedEmpty.classList.remove("hidden");
         savedDaysList.innerHTML = "";
         return;
       }
-
       savedEmpty.classList.add("hidden");
-
       savedDaysList.innerHTML = savedIdeas.map((item, index) => {
         const day = item.data;
-
         return `
           <div class="item saved">
             <div class="item-top">
@@ -772,18 +731,14 @@
           </div>
         `;
       }).join("");
-
       document.querySelectorAll("[data-remove-key]").forEach((button) => {
-        button.addEventListener("click", () => {
-          removeSavedIdea(button.getAttribute("data-remove-key"));
-        });
+        button.addEventListener("click", () => removeSavedIdea(button.getAttribute("data-remove-key")));
       });
     }
 
     function createDayCard(day, generationLabel) {
       const key = getIdeaKey(day);
       const saved = isSaved(day);
-
       return `
         <div class="item generation-item ${saved ? "saved" : ""}" data-key="${escapeHtml(key)}">
           <div class="item-top">
@@ -819,24 +774,17 @@
       scope.querySelectorAll(".save-btn").forEach((button) => {
         if (button.dataset.bound === "true") return;
         button.dataset.bound = "true";
-
         button.addEventListener("click", () => {
           const key = button.getAttribute("data-key");
           const generationLabel = button.getAttribute("data-generation-label");
           const day = JSON.parse(button.getAttribute("data-day"));
-
-          if (savedIdeas.some((item) => item.key === key)) {
-            removeSavedIdea(key);
-          } else {
-            addSavedIdea(day, generationLabel);
-          }
+          if (savedIdeas.some((item) => item.key === key)) removeSavedIdea(key);
+          else addSavedIdea(day, generationLabel);
         });
       });
-
       scope.querySelectorAll(".regen-btn").forEach((button) => {
         if (button.dataset.bound === "true") return;
         button.dataset.bound = "true";
-
         button.addEventListener("click", async () => {
           await generateCalendar(false);
         });
@@ -846,7 +794,6 @@
     function appendGeneration(data) {
       generationCount += 1;
       const generationLabel = `Calendrier ${generationCount}`;
-
       const block = document.createElement("section");
       block.className = "generation-card";
       block.innerHTML = `
@@ -854,7 +801,6 @@
           <div class="generation-title">${generationLabel}</div>
           <div class="generation-badge">${(data.days || []).length} idées</div>
         </div>
-
         <div class="result-meta">
           <div class="item">
             <div class="item-top">
@@ -867,7 +813,6 @@
             <div><strong>Angle :</strong> ${escapeHtml(data.meta.angle || "—")}</div>
           </div>
         </div>
-
         <div class="section-block">
           <div class="pill">Piliers</div>
           <div class="pillars" style="margin-top: 12px;">
@@ -884,24 +829,21 @@
             `).join("")}
           </div>
         </div>
-
         <div class="section-block">
           <div class="pill">Plan sur 30 jours</div>
           <div class="days" style="margin-top: 12px;">
             ${(data.days || []).map((day) => createDayCard(day, generationLabel)).join("")}
           </div>
         </div>
-
         <div class="generation-actions">
           <button class="button regen regen-btn" type="button">Regénérer ce calendrier</button>
         </div>
       `;
-
+      block.appendChild;
       generationStack.appendChild(block);
       attachDynamicEvents(block);
       rerenderSaveButtons();
       renderSavedIdeas();
-
       block.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -914,35 +856,25 @@
         tone: form.tone.value.trim(),
         angle: form.angle.value.trim()
       };
-
       setGlobalButtonsDisabled(true);
-
-      if (isFirstGeneration && generationCount === 0) {
-        setStatus("Premier chargement : le serveur se réveille, cela peut prendre jusqu’à 30 secondes.", "loading");
-      } else {
-        setStatus("Génération du calendrier en cours...", "loading");
-      }
-
+      if (isFirstGeneration && generationCount === 0) setStatus("Premier chargement : le serveur se réveille, cela peut prendre jusqu’à 30 secondes.", "loading");
+      else setStatus("Génération du calendrier en cours...", "loading");
       try {
         const response = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
-
         const rawData = await parseJsonUtf8(response);
         const data = normalizeApiData(rawData);
-
         if (!response.ok) {
           if (response.status === 429 && data?.detail?.message) {
             throw new Error("API_429::" + data.detail.message);
           }
           throw new Error("Erreur API " + response.status);
         }
-
         emptyState.classList.add("hidden");
         resultBlock.classList.remove("hidden");
-
         appendGeneration(data);
         renderQuota(data.quota);
         setStatus("Calendrier généré avec succès.", "success");
@@ -969,7 +901,7 @@
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/service-worker.js")
+        navigator.serviceWorker.register("./service-worker.js")
           .then(() => console.log("Service Worker enregistré"))
           .catch((error) => console.error("Erreur Service Worker :", error));
       });
@@ -977,3 +909,5 @@
   </script>
 </body>
 </html>
+```
+
